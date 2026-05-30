@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>RemoteGenius AI — India's Premier AI Talent Marketplace</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --navy:#050e1f;
+    --navy2:#0a1628;
+    --navy3:#0f2040;
+    --blue:#0057ff;
+    --blue2:#1a6bff;
+    --cyan:#00d4ff;
+    --cyan2:#00f5d4;
+    --white:#f0f4ff;
+    --muted:#8899bb;
+    --card:#0d1d38;
+    --card2:#122240;
+    --border:rgba(0,212,255,0.12);
+    --border2:rgba(0,212,255,0.25);
+    --radius:14px;
+    --radius2:20px;
+  }
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'DM Sans',sans-serif;
+    background:var(--navy);
+    color:var(--white);
+    overflow-x:hidden;
+  }
+  h1,h2,h3,h4,h5{font-family:'Syne',sans-serif;letter-spacing:-0.02em}
+
+  /* NAV */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 48px;
+    background:rgba(5,14,31,0.82);
+    backdrop-filter:blur(20px);
+    border-bottom:0.5px solid var(--border);
+  }
+  .logo{
+    font-family:'Syne',sans-serif;
+    font-size:22px;font-weight:800;
+    background:linear-gradient(90deg,var(--cyan),var(--blue2));
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    letter-spacing:-0.04em;
+  }
+  .logo span{color:var(--white);-webkit-text-fill-color:var(--white);opacity:0.6}
+  .nav-links{display:flex;gap:32px;list-style:none}
+  .nav-links a{
+    color:var(--muted);font-size:14px;font-weight:500;text-decoration:none;
+    transition:color .2s;
+  }
+  .nav-links a:hover{color:var(--white)}
+  .nav-cta{display:flex;gap:12px;align-items:center}
+  .btn-ghost{
+    background:none;border:0.5px solid var(--border2);
+    color:var(--cyan);font-size:14px;font-weight:500;
+    padding:9px 20px;border-radius:8px;cursor:pointer;
+    font-family:'DM Sans',sans-serif;
+    transition:all .2s;
+  }
+  .btn-ghost:hover{background:rgba(0,212,255,0.08)}
+  .btn-primary{
+    background:linear-gradient(135deg,var(--blue),var(--blue2));
+    border:none;color:#fff;font-size:14px;font-weight:500;
+    padding:9px 22px;border-radius:8px;cursor:pointer;
+    font-family:'DM Sans',sans-serif;
+    box-shadow:0 4px 24px rgba(0,87,255,0.35);
+    transition:all .2s;
+  }
+  .btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 32px rgba(0,87,255,0.5)}
+
+  /* HERO */
+  .hero{
+    min-height:100vh;
+    display:flex;flex-direction:column;
+    align-items:center;justify-content:center;
+    text-align:center;
+    padding:120px 24px 80px;
+    position:relative;overflow:hidden;
+  }
+  .hero-bg{
+    position:absolute;inset:0;z-index:0;
+    background:
+      radial-gradient(ellipse 900px 500px at 50% 10%,rgba(0,87,255,0.15) 0%,transparent 70%),
+      radial-gradient(ellipse 600px 400px at 80% 60%,rgba(0,212,255,0.08) 0%,transparent 70%),
+      radial-gradient(ellipse 400px 300px at 20% 70%,rgba(0,245,212,0.06) 0%,transparent 70%);
+  }
+  .hero-grid{
+    position:absolute;inset:0;z-index:0;
+    background-image:
+      linear-gradient(rgba(0,212,255,0.04) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(0,212,255,0.04) 1px,transparent 1px);
+    background-size:60px 60px;
+    mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,black,transparent);
+  }
+  .badge{
+    display:inline-flex;align-items:center;gap:8px;
+    background:rgba(0,212,255,0.08);
+    border:0.5px solid rgba(0,212,255,0.3);
+    border-radius:100px;
+    padding:6px 16px;
+    font-size:13px;color:var(--cyan);
+    margin-bottom:28px;
+    position:relative;z-index:1;
+  }
+  .badge-dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(0.8)}}
+  .hero h1{
+    font-size:clamp(42px,6vw,80px);
+    font-weight:800;
+    line-height:1.05;
+    max-width:850px;
+    position:relative;z-index:1;
+    margin-bottom:24px;
+  }
+  .hero h1 .gradient-text{
+    background:linear-gradient(135deg,var(--cyan) 0%,var(--blue2) 50%,var(--cyan2) 100%);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  }
+  .hero-sub{
+    font-size:18px;color:var(--muted);max-width:600px;
+    line-height:1.7;margin-bottom:40px;position:relative;z-index:1;
+  }
+  .hero-btns{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;position:relative;z-index:1}
+  .btn-hero-primary{
+    background:linear-gradient(135deg,#0057ff,#1a6bff);
+    border:none;color:#fff;font-size:16px;font-weight:600;
+    padding:16px 36px;border-radius:12px;cursor:pointer;
+    font-family:'Syne',sans-serif;
+    box-shadow:0 8px 32px rgba(0,87,255,0.4);
+    transition:all .25s;
+  }
+  .btn-hero-primary:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(0,87,255,0.55)}
+  .btn-hero-ghost{
+    background:rgba(255,255,255,0.04);
+    border:0.5px solid rgba(255,255,255,0.2);
+    color:var(--white);font-size:16px;font-weight:500;
+    padding:16px 36px;border-radius:12px;cursor:pointer;
+    font-family:'DM Sans',sans-serif;
+    transition:all .25s;
+  }
+  .btn-hero-ghost:hover{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.35)}
+  .hero-stats{
+    display:flex;gap:48px;margin-top:64px;
+    position:relative;z-index:1;
+    flex-wrap:wrap;justify-content:center;
+  }
+  .stat-item{text-align:center}
+  .stat-num{
+    font-family:'Syne',sans-serif;
+    font-size:32px;font-weight:800;
+    background:linear-gradient(135deg,var(--white),var(--cyan));
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  }
+  .stat-label{font-size:13px;color:var(--muted);margin-top:4px}
+
+  /* SECTION */
+  section{padding:100px 48px;max-width:1280px;margin:0 auto}
+  .section-label{
+    font-size:12px;font-weight:600;letter-spacing:0.12em;
+    text-transform:uppercase;color:var(--cyan);
+    margin-bottom:16px;
+  }
+  .section-title{
+    font-size:clamp(32px,4vw,52px);font-weight:800;
+    line-height:1.1;margin-bottom:20px;
+    max-width:680px;
+  }
+  .section-sub{font-size:17px;color:var(--muted);max-width:580px;line-height:1.7}
+
+  /* CATEGORIES */
+  .cat-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+    gap:16px;
+    margin-top:56px;
+  }
+  .cat-card{
+    background:var(--card);
+    border:0.5px solid var(--border);
+    border-radius:var(--radius);
+    padding:28px 20px;
+    cursor:pointer;
+    transition:all .25s;
+    position:relative;overflow:hidden;
+  }
+  .cat-card::before{
+    content:'';position:absolute;inset:0;
+    background:linear-gradient(135deg,rgba(0,212,255,0.06),transparent);
+    opacity:0;transition:opacity .25s;
+  }
+  .cat-card:hover{border-color:var(--border2);transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,212,255,0.1)}
+  .cat-card:hover::before{opacity:1}
+  .cat-icon{
+    width:44px;height:44px;border-radius:10px;
+    background:rgba(0,87,255,0.15);
+    display:flex;align-items:center;justify-content:center;
+    font-size:22px;margin-bottom:14px;
+  }
+  .cat-name{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--white)}
+  .cat-count{font-size:13px;color:var(--muted);margin-top:4px}
+
+  /* HOW IT WORKS */
+  .how-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:48px;
+    margin-top:64px;
+  }
+  .how-block{
+    background:var(--card);
+    border:0.5px solid var(--border);
+    border-radius:var(--radius2);
+    padding:40px;
+  }
+  .how-block-title{
+    font-family:'Syne',sans-serif;
+    font-size:20px;font-weight:700;
+    margin-bottom:32px;
+    display:flex;align-items:center;gap:12px;
+  }
+  .how-pill{
+    font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;
+    padding:4px 12px;border-radius:100px;
+    background:rgba(0,212,255,0.1);color:var(--cyan);
+    border:0.5px solid rgba(0,212,255,0.25);
+  }
+  .how-step{
+    display:flex;gap:16px;margin-bottom:24px;align-items:flex-start;
+  }
+  .step-num{
+    width:32px;height:32px;border-radius:50%;
+    background:rgba(0,87,255,0.2);
+    border:0.5px solid rgba(0,87,255,0.4);
+    display:flex;align-items:center;justify-content:center;
+    font-size:13px;font-weight:700;color:var(--blue2);
+    flex-shrink:0;
+    font-family:'Syne',sans-serif;
+  }
+  .step-text strong{display:block;font-size:15px;font-weight:600;color:var(--white);margin-bottom:2px}
+  .step-text span{font-size:13px;color:var(--muted)}
+
+  /* ASSESSMENT */
+  .assess-section{
+    background:linear-gradient(135deg,var(--navy2),var(--navy3));
+    border-top:0.5px solid var(--border);
+    border-bottom:0.5px solid var(--border);
+    padding:100px 0;
+  }
+  .assess-inner{max-width:1280px;margin:0 auto;padding:0 48px}
+  .assess-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;margin-top:48px}
+  .assess-feat-list{display:flex;flex-direction:column;gap:16px;margin-top:32px}
+  .assess-feat{
+    display:flex;align-items:center;gap:12px;
+    font-size:15px;color:var(--muted);
+  }
+  .feat-dot{width:8px;height:8px;border-radius:50%;background:var(--cyan);flex-shrink:0}
+  .assess-card{
+    background:var(--card2);
+    border:0.5px solid var(--border);
+    border-radius:var(--radius2);
+    padding:36px;
+  }
+  .assess-progress-item{margin-bottom:20px}
+  .assess-prog-header{display:flex;justify-content:space-between;margin-bottom:8px}
+  .assess-prog-name{font-size:14px;font-weight:500;color:var(--white)}
+  .assess-prog-val{font-size:13px;color:var(--cyan)}
+  .prog-bar{height:6px;background:rgba(255,255,255,0.06);border-radius:4px;overflow:hidden}
+  .prog-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--blue),var(--cyan));transition:width 1s ease}
+  .assess-note{
+    margin-top:24px;padding:16px;
+    background:rgba(0,212,255,0.05);
+    border:0.5px solid rgba(0,212,255,0.2);
+    border-radius:10px;
+    font-size:13px;color:var(--muted);
+    font-style:italic;line-height:1.6;
+  }
+
+  /* TRUST */
+  .trust-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
+    margin-top:56px;
+  }
+  .trust-card{
+    background:var(--card);
+    border:0.5px solid var(--border);
+    border-radius:var(--radius);
+    padding:32px;
+    position:relative;overflow:hidden;
+  }
+  .trust-card::after{
+    content:'';position:absolute;top:0;left:0;right:0;height:2px;
+    background:linear-gradient(90deg,transparent,var(--cyan),transparent);
+  }
+  .trust-icon{font-size:28px;margin-bottom:16px}
+  .trust-title{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;color:var(--white);margin-bottom:8px}
+  .trust-text{font-size:14px;color:var(--muted);line-height:1.7}
+
+  /* TESTIMONIALS */
+  .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px}
+  .testi-card{
+    background:var(--card);
+    border:0.5px solid var(--border);
+    border-radius:var(--radius);
+    padding:32px;
+  }
+  .testi-stars{color:var(--cyan);font-size:15px;margin-bottom:16px;letter-spacing:2px}
+  .testi-text{font-size:14px;color:var(--muted);line-height:1.75;margin-bottom:20px;font-style:italic}
+  .testi-author{display:flex;align-items:center;gap:12px}
+  .testi-avatar{
+    width:38px;height:38px;border-radius:50%;
+    background:linear-gradient(135deg,var(--blue),var(--cyan));
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:#fff;
+  }
+  .testi-name{font-size:14px;font-weight:600;color:var(--white)}
+  .testi-role{font-size:12px;color:var(--muted)}
+
+  /* FAQ */
+  .faq-list{max-width:760px;margin:56px auto 0}
+  .faq-item{
+    border-bottom:0.5px solid var(--border);
+    padding:20px 0;cursor:pointer;
+  }
+  .faq-q{
+    display:flex;justify-content:space-between;align-items:center;
+    font-size:16px;font-weight:500;color:var(--white);
+  }
+  .faq-icon{font-size:20px;color:var(--cyan);transition:transform .3s;flex-shrink:0}
+  .faq-a{font-size:14px;color:var(--muted);line-height:1.75;margin-top:12px;display:none}
+  .faq-item.open .faq-a{display:block}
+  .faq-item.open .faq-icon{transform:rotate(45deg)}
+
+  /* CTA */
+  .cta-section{
+    background:linear-gradient(135deg,rgba(0,87,255,0.15),rgba(0,212,255,0.08));
+    border:0.5px solid var(--border2);
+    border-radius:var(--radius2);
+    padding:80px 60px;
+    text-align:center;
+    margin:80px 48px;
+    position:relative;overflow:hidden;
+  }
+  .cta-section::before{
+    content:'';position:absolute;inset:0;
+    background:radial-gradient(ellipse 600px 300px at 50% 0%,rgba(0,212,255,0.06),transparent);
+  }
+  .cta-h{font-size:clamp(32px,4vw,48px);font-weight:800;margin-bottom:16px;position:relative;z-index:1}
+  .cta-sub{font-size:17px;color:var(--muted);margin-bottom:40px;position:relative;z-index:1}
+  .cta-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1}
+
+  /* FOOTER */
+  footer{
+    border-top:0.5px solid var(--border);
+    padding:48px;
+    display:grid;grid-template-columns:2fr 1fr 1fr 1fr;
+    gap:48px;
+    max-width:1280px;margin:0 auto;
+  }
+  .footer-brand .logo{font-size:20px}
+  .footer-brand p{font-size:14px;color:var(--muted);margin-top:12px;line-height:1.7;max-width:280px}
+  .footer-contact{margin-top:20px;font-size:13px;color:var(--muted)}
+  .footer-contact a{color:var(--cyan);text-decoration:none}
+  .footer-col h4{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--white);margin-bottom:16px}
+  .footer-col ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+  .footer-col ul a{font-size:14px;color:var(--muted);text-decoration:none;transition:color .2s}
+  .footer-col ul a:hover{color:var(--white)}
+  .footer-bottom{
+    border-top:0.5px solid var(--border);
+    padding:24px 48px;
+    display:flex;justify-content:space-between;align-items:center;
+    font-size:13px;color:var(--muted);
+    max-width:1280px;margin:0 auto;
+  }
+  .social-links{display:flex;gap:16px}
+  .social-links a{color:var(--muted);text-decoration:none;transition:color .2s}
+  .social-links a:hover{color:var(--cyan)}
+
+  /* JOBS PREVIEW */
+  .jobs-preview{display:flex;flex-direction:column;gap:12px;margin-top:48px}
+  .job-row{
+    background:var(--card);
+    border:0.5px solid var(--border);
+    border-radius:var(--radius);
+    padding:20px 28px;
+    display:flex;align-items:center;justify-content:space-between;
+    transition:all .2s;cursor:pointer;flex-wrap:wrap;gap:12px;
+  }
+  .job-row:hover{border-color:var(--border2);background:var(--card2)}
+  .job-info{display:flex;align-items:center;gap:16px}
+  .job-dot{width:10px;height:10px;border-radius:50%;background:var(--cyan);flex-shrink:0}
+  .job-title{font-size:15px;font-weight:600;color:var(--white)}
+  .job-company{font-size:13px;color:var(--muted);margin-top:2px}
+  .job-tags{display:flex;gap:8px;flex-wrap:wrap}
+  .job-tag{
+    font-size:11px;padding:4px 10px;border-radius:100px;
+    background:rgba(0,87,255,0.12);color:#88aaff;
+    border:0.5px solid rgba(0,87,255,0.25);
+  }
+  .job-tag.remote{background:rgba(0,212,255,0.08);color:var(--cyan);border-color:rgba(0,212,255,0.2)}
+  .job-apply{
+    font-size:13px;font-weight:600;color:var(--blue2);
+    background:rgba(0,87,255,0.1);border:0.5px solid rgba(0,87,255,0.25);
+    padding:7px 16px;border-radius:7px;cursor:pointer;
+    font-family:'DM Sans',sans-serif;
+    transition:all .2s;white-space:nowrap;
+  }
+  .job-apply:hover{background:rgba(0,87,255,0.2)}
+
+  @media(max-width:900px){
+    nav{padding:16px 24px}
+    .nav-links{display:none}
+    section{padding:64px 24px}
+    .how-grid,.assess-grid,.trust-grid,.testi-grid{grid-template-columns:1fr}
+    footer{grid-template-columns:1fr 1fr;padding:32px 24px}
+    .footer-bottom{padding:20px 24px;flex-direction:column;gap:12px;text-align:center}
+    .cta-section{margin:40px 24px;padding:48px 24px}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">RemoteGenius<span>.ai</span></div>
+  <ul class="nav-links">
+    <li><a href="#">Find Jobs</a></li>
+    <li><a href="#">Hire Talent</a></li>
+    <li><a href="#">Assessment Center</a></li>
+    <li><a href="#">About</a></li>
+  </ul>
+  <div class="nav-cta">
+    <button class="btn-ghost">Log In</button>
+    <button class="btn-primary">Get Started</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="badge"><span class="badge-dot"></span> India's #1 AI Talent Marketplace</div>
+  <h1>Hire India's Best<br><span class="gradient-text">Remote Talent</span></h1>
+  <p class="hero-sub">Connect with pre-screened AI professionals, developers, annotators, researchers, evaluators, and domain specialists ready to elevate your projects.</p>
+  <div class="hero-btns">
+    <button class="btn-hero-primary">Hire Talent →</button>
+    <button class="btn-hero-ghost">Apply as Talent</button>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-item"><div class="stat-num">12,400+</div><div class="stat-label">Verified Professionals</div></div>
+    <div class="stat-item"><div class="stat-num">800+</div><div class="stat-label">Companies Hiring</div></div>
+    <div class="stat-item"><div class="stat-num">97%</div><div class="stat-label">Client Satisfaction</div></div>
+    <div class="stat-item"><div class="stat-num">48hr</div><div class="stat-label">Avg. Hiring Time</div></div>
+  </div>
+</div>
+
+<!-- CATEGORIES -->
+<section>
+  <div class="section-label">Talent Categories</div>
+  <h2 class="section-title">Every Skill You Need, Ready to Deploy</h2>
+  <p class="section-sub">Browse our curated pool of specialists across AI, technology, research, and creative domains.</p>
+  <div class="cat-grid">
+    <div class="cat-card"><div class="cat-icon">🤖</div><div class="cat-name">AI Trainers</div><div class="cat-count">2,100+ available</div></div>
+    <div class="cat-card"><div class="cat-icon">🏷️</div><div class="cat-name">Data Annotators</div><div class="cat-count">3,400+ available</div></div>
+    <div class="cat-card"><div class="cat-icon">⚙️</div><div class="cat-name">Prompt Engineers</div><div class="cat-count">980+ available</div></div>
+    <div class="cat-card"><div class="cat-icon">💻</div><div class="cat-name">Software Developers</div><div class="cat-count">4,200+ available</div></div>
+    <div class="cat-card"><div class="cat-icon">🎬</div><div class="cat-name">Video Evaluators</div><div class="cat-count">760+ available</div></div>
+    <div class="cat-card"><div class="cat-icon">📝</div><div class="cat-name">Content Reviewers</div><div class="cat-count">1,500+ available</div></div>
+    <div class="cat-card"><div class="cat-icon">🔬</div><div class="cat-name">Researchers</div><div class="cat-count">620+ available</div></div>
+    <div class="cat-card"><div class="cat-icon">🎨</div><div class="cat-name">Designers</div><div class="cat-count">880+ available</div></div>
+    <div class="cat-card"><div class="cat-icon">📊</div><div class="cat-name">Data Analysts</div><div class="cat-count">1,100+ available</div></div>
+    <div class="cat-card"><div class="cat-icon">🧑‍💼</div><div class="cat-name">Domain Experts</div><div class="cat-count">540+ available</div></div>
+    <div class="cat-card"><div class="cat-icon">🔍</div><div class="cat-name">QA Specialists</div><div class="cat-count">700+ available</div></div>
+    <div class="cat-card"><div class="cat-icon">📈</div><div class="cat-name">Business Professionals</div><div class="cat-count">430+ available</div></div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section style="padding-top:20px">
+  <div class="section-label">How It Works</div>
+  <h2 class="section-title">Simple, Transparent, Effective</h2>
+  <div class="how-grid">
+    <div class="how-block">
+      <div class="how-block-title">🧑‍💻 <span>For Talent</span> <span class="how-pill">Earn More</span></div>
+      <div class="how-step"><div class="step-num">1</div><div class="step-text"><strong>Create Account</strong><span>Sign up with email or Google in under 2 minutes</span></div></div>
+      <div class="how-step"><div class="step-num">2</div><div class="step-text"><strong>Complete Assessments</strong><span>Demonstrate your skills with domain-specific tests</span></div></div>
+      <div class="how-step"><div class="step-num">3</div><div class="step-text"><strong>Profile Verification</strong><span>Identity and skill verification for trusted status</span></div></div>
+      <div class="how-step"><div class="step-num">4</div><div class="step-text"><strong>Get Approved</strong><span>Our team reviews and approves qualified candidates</span></div></div>
+      <div class="how-step"><div class="step-num">5</div><div class="step-text"><strong>Access Opportunities</strong><span>Browse and apply to curated remote projects</span></div></div>
+    </div>
+    <div class="how-block">
+      <div class="how-block-title">🏢 <span>For Companies</span> <span class="how-pill">Hire Faster</span></div>
+      <div class="how-step"><div class="step-num">1</div><div class="step-text"><strong>Create Company Account</strong><span>Set up your employer profile and team</span></div></div>
+      <div class="how-step"><div class="step-num">2</div><div class="step-text"><strong>Post Jobs</strong><span>Describe your requirements and post to thousands of professionals</span></div></div>
+      <div class="how-step"><div class="step-num">3</div><div class="step-text"><strong>Review Candidates</strong><span>Browse AI-matched, pre-screened profiles</span></div></div>
+      <div class="how-step"><div class="step-num">4</div><div class="step-text"><strong>Schedule Interviews</strong><span>Integrated scheduling with automated reminders</span></div></div>
+      <div class="how-step"><div class="step-num">5</div><div class="step-text"><strong>Hire & Manage</strong><span>Onboard talent and manage projects in one dashboard</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ASSESSMENT -->
+<div class="assess-section">
+  <div class="assess-inner">
+    <div class="section-label">Assessment Center</div>
+    <h2 class="section-title">Precision Skill Verification</h2>
+    <div class="assess-grid">
+      <div>
+        <p class="section-sub">Our multi-stage assessment system ensures every professional on RemoteGenius AI meets the highest standards of competency.</p>
+        <div class="assess-feat-list">
+          <div class="assess-feat"><span class="feat-dot"></span>Online skill assessments with automated scoring</div>
+          <div class="assess-feat"><span class="feat-dot"></span>Domain-specific and AI evaluation tests</div>
+          <div class="assess-feat"><span class="feat-dot"></span>Coding challenges and knowledge verification</div>
+          <div class="assess-feat"><span class="feat-dot"></span>Progress tracking and performance dashboard</div>
+          <div class="assess-feat"><span class="feat-dot"></span>Multiple choice and scenario-based questions</div>
+        </div>
+        <div style="margin-top:28px;padding:20px;background:rgba(0,212,255,0.04);border:0.5px solid rgba(0,212,255,0.15);border-radius:12px;font-size:14px;color:var(--muted);line-height:1.65;font-style:italic">
+          "Candidates may be required to complete assessments as part of the qualification process."
+        </div>
+      </div>
+      <div class="assess-card">
+        <div style="font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--white);margin-bottom:28px">Assessment Performance</div>
+        <div class="assess-progress-item"><div class="assess-prog-header"><span class="assess-prog-name">AI & Machine Learning</span><span class="assess-prog-val">92%</span></div><div class="prog-bar"><div class="prog-fill" style="width:92%"></div></div></div>
+        <div class="assess-progress-item"><div class="assess-prog-header"><span class="assess-prog-name">Data Annotation</span><span class="assess-prog-val">88%</span></div><div class="prog-bar"><div class="prog-fill" style="width:88%"></div></div></div>
+        <div class="assess-progress-item"><div class="assess-prog-header"><span class="assess-prog-name">Prompt Engineering</span><span class="assess-prog-val">85%</span></div><div class="prog-bar"><div class="prog-fill" style="width:85%"></div></div></div>
+        <div class="assess-progress-item"><div class="assess-prog-header"><span class="assess-prog-name">Software Development</span><span class="assess-prog-val">90%</span></div><div class="prog-bar"><div class="prog-fill" style="width:90%"></div></div></div>
+        <div class="assess-progress-item"><div class="assess-prog-header"><span class="assess-prog-name">Research & Analysis</span><span class="assess-prog-val">79%</span></div><div class="prog-bar"><div class="prog-fill" style="width:79%"></div></div></div>
+        <div style="margin-top:20px;font-size:12px;color:var(--muted)">Average pass rates across all active assessments</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- JOBS PREVIEW -->
+<section>
+  <div class="section-label">Job Marketplace</div>
+  <h2 class="section-title">Live Opportunities</h2>
+  <p class="section-sub">Thousands of remote roles updated daily across AI, tech, and research.</p>
+  <div class="jobs-preview">
+    <div class="job-row">
+      <div class="job-info"><span class="job-dot"></span><div><div class="job-title">Senior AI Trainer — NLP</div><div class="job-company">TechVentures India · Bengaluru</div></div></div>
+      <div class="job-tags"><span class="job-tag">AI / ML</span><span class="job-tag remote">Remote</span><span class="job-tag">Full-time</span></div>
+      <button class="job-apply">Apply Now</button>
+    </div>
+    <div class="job-row">
+      <div class="job-info"><span class="job-dot"></span><div><div class="job-title">Data Annotation Specialist</div><div class="job-company">DataCore Solutions · Mumbai</div></div></div>
+      <div class="job-tags"><span class="job-tag">Annotation</span><span class="job-tag remote">Remote</span><span class="job-tag">Contract</span></div>
+      <button class="job-apply">Apply Now</button>
+    </div>
+    <div class="job-row">
+      <div class="job-info"><span class="job-dot"></span><div><div class="job-title">Prompt Engineer — LLM Applications</div><div class="job-company">AIFoundry · Hyderabad</div></div></div>
+      <div class="job-tags"><span class="job-tag">Prompt Eng.</span><span class="job-tag remote">Remote</span><span class="job-tag">Freelance</span></div>
+      <button class="job-apply">Apply Now</button>
+    </div>
+    <div class="job-row">
+      <div class="job-info"><span class="job-dot"></span><div><div class="job-title">Video Content Evaluator</div><div class="job-company">MediaMesh Technologies · Delhi</div></div></div>
+      <div class="job-tags"><span class="job-tag">Evaluation</span><span class="job-tag remote">Remote</span><span class="job-tag">Part-time</span></div>
+      <button class="job-apply">Apply Now</button>
+    </div>
+    <div class="job-row">
+      <div class="job-info"><span class="job-dot"></span><div><div class="job-title">Research Analyst — AI Ethics</div><div class="job-company">PolicyAI Institute · Pune</div></div></div>
+      <div class="job-tags"><span class="job-tag">Research</span><span class="job-tag remote">Remote</span><span class="job-tag">Full-time</span></div>
+      <button class="job-apply">Apply Now</button>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:36px">
+    <button class="btn-ghost" style="padding:12px 32px;font-size:15px">Browse All Jobs →</button>
+  </div>
+</section>
+
+<!-- TRUST -->
+<section style="padding-top:20px">
+  <div class="section-label">Trust & Verification</div>
+  <h2 class="section-title">Hire with Confidence</h2>
+  <div class="trust-grid">
+    <div class="trust-card"><div class="trust-icon">✅</div><div class="trust-title">Verified Profiles</div><div class="trust-text">Every professional undergoes identity verification and skill validation before appearing in search results.</div></div>
+    <div class="trust-card"><div class="trust-icon">🛡️</div><div class="trust-title">Fraud Prevention</div><div class="trust-text">AI-powered fraud detection and manual review ensure only genuine, qualified talent is on the platform.</div></div>
+    <div class="trust-card"><div class="trust-icon">🔒</div><div class="trust-title">Data Protection</div><div class="trust-text">End-to-end encrypted communications and GDPR-compliant data handling across all interactions.</div></div>
+    <div class="trust-card"><div class="trust-icon">⭐</div><div class="trust-title">Skill Certification</div><div class="trust-text">Assessment-backed skill badges give employers instant confidence in a candidate's verified expertise.</div></div>
+    <div class="trust-card"><div class="trust-icon">🤝</div><div class="trust-title">Secure Contracts</div><div class="trust-text">Standardized agreements and milestone-based project management protect both parties.</div></div>
+    <div class="trust-card"><div class="trust-icon">📊</div><div class="trust-title">Performance Analytics</div><div class="trust-text">Transparent ratings, delivery records, and peer reviews provide a complete picture of every professional.</div></div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section style="padding-top:20px">
+  <div class="section-label">Testimonials</div>
+  <h2 class="section-title">Loved by Teams Across India</h2>
+  <div class="testi-grid">
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">We hired three AI trainers within 48 hours. The quality of candidates and the verification process are miles ahead of any other platform we've tried.</p>
+      <div class="testi-author"><div class="testi-avatar">RK</div><div><div class="testi-name">Rahul Krishnamurthy</div><div class="testi-role">CTO, NeuralStack Bengaluru</div></div></div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">RemoteGenius AI gave me access to high-quality annotation projects that I never found on other platforms. The assessment process is fair and transparent.</p>
+      <div class="testi-author"><div class="testi-avatar">PS</div><div><div class="testi-name">Priya Sharma</div><div class="testi-role">Freelance Data Annotator, Pune</div></div></div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">As an HR manager, this platform cut our remote hiring time by 60%. The pre-screened talent pool is exceptional and the dashboards are intuitive.</p>
+      <div class="testi-author"><div class="testi-avatar">AM</div><div><div class="testi-name">Anjali Mehta</div><div class="testi-role">HR Director, FutureTech Mumbai</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section style="padding-top:20px">
+  <div class="section-label">FAQ</div>
+  <h2 class="section-title" style="text-align:center;max-width:100%">Frequently Asked Questions</h2>
+  <div class="faq-list">
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">How does the talent verification process work? <span class="faq-icon">+</span></div>
+      <div class="faq-a">Our three-step process includes identity verification, domain-specific assessments, and a manual review by our talent team. Only candidates who meet all criteria are approved and visible to employers.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Are assessments mandatory for all talent categories? <span class="faq-icon">+</span></div>
+      <div class="faq-a">Candidates may be required to complete assessments as part of the qualification process. Assessment requirements vary by category and the specific roles you're applying for.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">How quickly can I hire talent for my project? <span class="faq-icon">+</span></div>
+      <div class="faq-a">Most companies make their first hire within 48 hours of posting a job. Our pre-screened talent pool and AI matching ensure you see the most relevant candidates immediately.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">What types of work arrangements are supported? <span class="faq-icon">+</span></div>
+      <div class="faq-a">We support full-time, part-time, contract, freelance, and project-based engagements — all remote. Employers and talent agree on terms through our secure platform.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">How is my data kept secure? <span class="faq-icon">+</span></div>
+      <div class="faq-a">All data is encrypted in transit and at rest. We follow industry-standard security practices and are committed to user privacy and data protection.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">How do I contact support? <span class="faq-icon">+</span></div>
+      <div class="faq-a">Reach us at remotegenius.ai@gmail.com. Our support team typically responds within 4–8 business hours.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-section">
+  <div class="cta-h">Ready to Build Your Dream Team?</div>
+  <p class="cta-sub">Join 800+ companies already hiring India's finest remote professionals on RemoteGenius AI.</p>
+  <div class="cta-btns">
+    <button class="btn-hero-primary">Start Hiring Today →</button>
+    <button class="btn-hero-ghost">Join as Talent</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <div class="logo">RemoteGenius<span>.ai</span></div>
+    <p>India's premier AI talent marketplace connecting businesses with verified remote professionals across AI, tech, research, and beyond.</p>
+    <div class="footer-contact">Contact: <a href="mailto:remotegenius.ai@gmail.com">remotegenius.ai@gmail.com</a></div>
+  </div>
+  <div class="footer-col">
+    <h4>Platform</h4>
+    <ul>
+      <li><a href="#">Find Jobs</a></li>
+      <li><a href="#">Hire Talent</a></li>
+      <li><a href="#">Assessment Center</a></li>
+      <li><a href="#">Talent Directory</a></li>
+      <li><a href="#">Employer Portal</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h4>Company</h4>
+    <ul>
+      <li><a href="#">About Us</a></li>
+      <li><a href="#">Careers</a></li>
+      <li><a href="#">Blog</a></li>
+      <li><a href="#">Contact</a></li>
+      <li><a href="#">Support</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h4>Legal</h4>
+    <ul>
+      <li><a href="#">Privacy Policy</a></li>
+      <li><a href="#">Terms of Service</a></li>
+      <li><a href="#">Cookie Policy</a></li>
+      <li><a href="#">Security</a></li>
+    </ul>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <span>© 2025 RemoteGenius AI. All rights reserved.</span>
+  <div class="social-links">
+    <a href="#">LinkedIn</a>
+    <a href="#">X (Twitter)</a>
+    <a href="#">Facebook</a>
+  </div>
+</div>
+
+<script>
+function toggleFaq(el){el.classList.toggle('open')}
+</script>
+</body>
+</html>
